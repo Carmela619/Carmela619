@@ -12,34 +12,3 @@
     "link": "https://your-payment-link.com"
   }
 ]
-async function loadGitHubShop() {
-    // Replace with your actual GitHub RAW link to products.json
-    const githubUrl = 'https://raw.githubusercontent.com/YOUR_USER/YOUR_REPO/main/products.json';
-    const container = document.getElementById('product-list');
-
-    try {
-        const response = await fetch(githubUrl);
-        const products = await response.json();
-
-        // Clear the "Loading" text
-        container.innerHTML = '';
-
-        products.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'product-card';
-            card.innerHTML = `
-                <img src="${item.image}" alt="${item.name}" style="width:100%; border-radius:15px; margin-bottom:10px;">
-                <h3>${item.name}</h3>
-                <p style="font-size: 1.5rem; color: #ff69b4;">${item.price}</p>
-                <a href="${item.link}" target="_blank" class="btn" style="text-decoration:none; display:inline-block;">Buy Now</a>
-            `;
-            container.appendChild(card);
-        });
-    } catch (error) {
-        console.error('Error loading shop:', error);
-        container.innerHTML = '<p>The shop is currently being restocked! Check back soon.</p>';
-    }
-}
-
-// Run the function when the page loads
-loadGitHubShop();
